@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oru Cup Story | Cookie Collection</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { background-color: #fffaf3; }
+
+    .navbar {
+      background-color: #f3e9d2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .navbar-brand {
+      display: flex; align-items: center;
+      font-weight: bold; color: #5a3e2b !important;
+      font-size: 1.3rem;
+    }
+    .navbar-brand img { width: 40px; height: 40px; margin-right: 10px; }
+    .nav-link { color: #5a3e2b !important; font-weight: 500; }
+    .nav-link:hover { color: #2d36cf !important; }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.75rem;
+    }
+    .card {
+      border: none;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+    .btn-custom {
+      border-radius: 30px;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+    }
+    <style>
+.cool-btn {
+  background: linear-gradient(135deg, #ff4d4d, #b30000);
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cool-btn:hover {
+  background: linear-gradient(135deg, #d1e0a9, #d9f787);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+}
+
+.cool-btn:active {
+  transform: scale(0.97);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg px-4">
+  <a class="navbar-brand" href="#">
+    <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png">
+    Oru Cup Story
+  </a>
+  <div class="ms-auto">
+    <button class="btn btn-warning" onclick="openCart()">
+      🛒 Cart <span class="badge bg-danger" id="cartCount">0</span>
+    </button>
+        <a href="teashop.html"><button class="cool-btn">Back</button></a>
+
+  </div>
+</nav>
+
+<!-- PRODUCT PAGE -->
+<div id="productPage">
+  <div class="container py-5 text-center">
+    <h2 class="fw-bold mb-5">🍰 Our Delicious Cake Collection 🍰</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="productList">
+
+      <!-- ALL YOUR ORIGINAL CARDS ARE INSERTED USING JS BELOW -->
+
+    </div>
+  </div>
+</div>
+
+<!-- CART PAGE -->
+<div id="cartPage" class="container py-5">
+  <h2 class="fw-bold mb-3">🛒 Your Cart</h2>
+  <div id="cartItems"></div>
+
+  <h4 class="text-end mt-3">Total Amount: Rs. <span id="totalAmount">0</span></h4>
+
+  <div class="text-end mt-3">
+<button class="btn btn-success" onclick="goToCheckout()">Buy Now</button>
+    <button class="btn btn-secondary ms-2" onclick="closeCart()">Back</button>
+  </div>
+</div>
+
+<!-- CHECKOUT PAGE -->
+<div id="checkoutPage" class="container py-5">
+  <h2 class="fw-bold mb-3">Checkout</h2>
+
+  <div class="card p-4 shadow">
+
+    <label class="mt-2">Full Name</label>
+    <input type="text" id="name" class="form-control">
+
+    <label class="mt-3">Address</label>
+    <textarea id="address" class="form-control"></textarea>
+
+    <label class="mt-3">Phone Number</label>
+    <input type="text" id="phone" class="form-control">
+
+    <button class="btn btn-success w-100 mt-4" onclick="placeOrder()">Place Order</button>
+    <button class="btn btn-secondary w-100 mt-2" onclick="backToCart()">Back</button>
+
+  </div>
+</div>
+
+<script>
+
+/* ------------------ ORIGINAL PRODUCT LIST ------------------ */
+const products = [
+  {name:"Apple Cinnamon Bun Cake", price:20, img:"https://i.pinimg.com/1200x/71/be/06/71be066811e336e1432eb8c97615cc0d.jpg"},
+  {name:"Rock Cake", price:12, img:"https://i.pinimg.com/736x/f1/8e/1d/f18e1d67d19fef17e7c94fdf64ef3e25.jpg"},
+  {name:"Custard Tea Buns", price:10, img:"https://i.pinimg.com/1200x/3d/58/10/3d5810d8be088d4959c7b2dccb218e3c.jpg"},
+  {name:"Pumpkin Spice Latte Cake", price:16, img:"https://i.pinimg.com/736x/ce/67/98/ce6798a9606ef81b9f44ebcd6cb58512.jpg"},
+  {name:"Chocolate Orange Cheesecake", price:22, img:"https://i.pinimg.com/736x/06/5e/18/065e180edd477fa91fcf75cef3e98318.jpg"},
+  {name:"Pecan Caramel Run Cake", price:19, img:"https://i.pinimg.com/1200x/ca/1c/3a/ca1c3a9c37f7cadce3a618a49b2fe61d.jpg"},
+  {name:"Chocolate Strawberry Cake", price:16, img:"https://i.pinimg.com/1200x/bc/53/05/bc5305c163e8473daf9a7c7db35e0788.jpg"},
+  {name:"Opera Cake", price:18, img:"https://i.pinimg.com/736x/11/77/b8/1177b87c7988c96794d815a4bbbd6fdf.jpg"},
+  {name:"Indulge Spicy Cake", price:23, img:"https://i.pinimg.com/1200x/c4/27/3d/c4273dfe9dfba192d9e76552ae20969f.jpg"},
+  {name:"Delight Red Velvet Cheesecake", price:21, img:"https://i.pinimg.com/736x/51/3c/c8/513cc81c977bf2290471d2c937dac3d1.jpg"},
+  {name:"Chocolate Swiss Roll Cake", price:24, img:"https://i.pinimg.com/1200x/a6/3d/79/a63d7951b3ef493d0fe09cf9e11ec2a1.jpg"},
+  {name:"Glazed Orange Pound Cake", price:26, img:"https://i.pinimg.com/1200x/c7/8e/1d/c78e1d86a578b9633e9c1f3f60b5d203.jpg"}
+];
+
+let cart = [];
+
+/* ------------------ DISPLAY ORIGINAL CARDS ------------------ */
+const productDiv = document.getElementById("productList");
+
+products.forEach((p, i) => {
+  productDiv.innerHTML += `
+    <div class="col">
+      <div class="card h-100">
+        <img src="${p.img}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">${p.name}</h5>
+          <p class="price">Rs. ${p.price}</p>
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-outline-success btn-custom" onclick="addToCart(${i})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+/* ------------------ ADD TO CART ------------------ */
+function addToCart(i){
+  let item = products[i];
+  let existing = cart.find(c => c.name === item.name);
+
+  if(existing) existing.qty++;
+  else cart.push({...item, qty:1});
+
+  document.getElementById("cartCount").innerText = cart.length;
+}
+
+/* ------------------ OPEN CART ------------------ */
+function openCart(){
+  document.getElementById("productPage").style.display="none";
+  document.getElementById("checkoutPage").style.display="none";
+  document.getElementById("cartPage").style.display="block";
+  loadCart();
+}
+
+/* ------------------ CLOSE CART ------------------ */
+function closeCart(){
+  document.getElementById("cartPage").style.display="none";
+  document.getElementById("productPage").style.display="block";
+}
+
+/* ------------------ LOAD CART ------------------ */
+function loadCart(){
+  const box = document.getElementById("cartItems");
+  box.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item, index)=>{
+    total += item.price * item.qty;
+
+    box.innerHTML += `
+      <div class="card p-3 mb-2 shadow-sm">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5>${item.name}</h5>
+            <p>Rs. ${item.price}</p>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <button class="btn btn-danger btn-sm" onclick="changeQty(${index},-1)">-</button>
+            <span class="mx-2">${item.qty}</span>
+            <button class="btn btn-success btn-sm" onclick="changeQty(${index},1)">+</button>
+          </div>
+
+          <button class="btn btn-dark btn-sm" onclick="removeItem(${index})">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("totalAmount").innerText = total;
+}
+
+/* ------------------ QTY +/- ------------------ */
+function changeQty(i, val){
+  cart[i].qty += val;
+  if(cart[i].qty <= 0) cart.splice(i,1);
+  document.getElementById("cartCount").innerText = cart.length;
+  loadCart();
+}
+
+/* ------------------ REMOVE ------------------ */
+function removeItem(i){
+  cart.splice(i,1);
+  document.getElementById("cartCount").innerText = cart.length;
+  loadCart();
+}
+
+
+function goToCheckout() {
+    window.location.href = "buynow.html";
+}
+
+</script>
+
+</body>
+</html>
+
