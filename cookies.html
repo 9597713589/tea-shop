@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oru Cup Story | Cookie Collection</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #fffaf3; }
+    .navbar { background-color: #f3e9d2; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .navbar-brand { display: flex; align-items: center; font-weight: bold; color: #5a3e2b !important; font-size: 1.3rem; }
+    .navbar-brand img { width: 40px; height: 40px; margin-right: 10px; }
+    .nav-link { color: #5a3e2b !important; font-weight: 500; font-size: 1rem; }
+    .nav-link:hover { color: #2d36cf !important; }
+    .card-img-top { height: 250px; object-fit: cover; border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
+    .card { border: none; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+    .card-title { font-weight: 600; color: #5a3e2b; }
+    .price { color: #2d36cf; font-weight: 500; margin-bottom: 10px; }
+    .btn-custom { border-radius: 30px; font-size: 0.85rem; padding: 4px 10px; }
+    .cart-icon { position: relative; font-size: 1.5rem; cursor: pointer; color: #5a3e2b; }
+    .cart-count { position: absolute; top: -10px; right: -10px; background-color: red; color: white; font-size: 0.75rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg px-4">
+    <a class="navbar-brand" href="#">
+      <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Tea Logo">
+      Oru Cup Story
+    </a>
+    <div class="ms-auto d-flex align-items-center">
+      <a class="nav-link me-3" href="teashop.html">Go to Home</a>
+      <div class="cart-icon" onclick="goToCart()">
+        🛒
+        <div class="cart-count" id="cartCount">0</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container -->
+  <div class="container py-5 text-center">
+    <h2 class="fw-bold mb-5">🍪 Our Delicious Cookie Collection 🍪</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+      <!-- All Products -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/f7/95/c7/f795c7cb5059cb61a7485e3bbd6ab8e3.jpg" class="card-img-top" alt="Honey Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Honey Cookie</h5>
+            <p class="price" data-price="14">Rs. 14</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Honey Cookie" data-price="14">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/0c/91/d1/0c91d1aa7f6821ff48811c71b4a52be4.jpg" class="card-img-top" alt="Chocolate Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Chocolate Cookie</h5>
+            <p class="price" data-price="12">Rs. 12</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Chocolate Cookie" data-price="12">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/90/70/64/907064633bd9946664dd09786e9cb5f2.jpg" class="card-img-top" alt="Chocolate Dot Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Chocolate Dot Cookie</h5>
+            <p class="price" data-price="16">Rs. 16</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Chocolate Dot Cookie" data-price="16">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/f3/bc/b6/f3bcb6187902539d7f96ebe3433d8816.jpg" class="card-img-top" alt="Marry Gold Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Marry Gold Cookie</h5>
+            <p class="price" data-price="18">Rs. 18</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Marry Gold Cookie" data-price="18">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/eb/7e/ac/eb7eac235b080248c5fc6aa2620c7d87.jpg" class="card-img-top" alt="Crunch Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Crunch Cookie</h5>
+            <p class="price" data-price="10">Rs. 10</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Crunch Cookie" data-price="10">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/6e/2e/df/6e2edf7050e2137fb81021443c013232.jpg" class="card-img-top" alt="Valentine Sugar Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Valentine Sugar Cookie</h5>
+            <p class="price" data-price="15">Rs. 15</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Valentine Sugar Cookie" data-price="15">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/1c/52/86/1c528618065fb8e3f9b7c8600bf337f0.jpg" class="card-img-top" alt="Rustic Sugar Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Rustic Sugar Cookie</h5>
+            <p class="price" data-price="17">Rs. 17</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Rustic Sugar Cookie" data-price="17">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/14/6d/0e/146d0e6d4c99a0ebeabb732c717f8d9a.jpg" class="card-img-top" alt="Chewy Double Chocolate Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Chewy Double Chocolate Cookie</h5>
+            <p class="price" data-price="19">Rs. 19</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Chewy Double Chocolate Cookie" data-price="19">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/9d/38/56/9d3856c7b0d363998842f608f0da7a5a.jpg" class="card-img-top" alt="Red Velvet Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Red Velvet Cookie</h5>
+            <p class="price" data-price="14">Rs. 14</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Red Velvet Cookie" data-price="14">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/736x/27/7b/db/277bdb1c1987d5aa08bd5ffa31b99a4b.jpg" class="card-img-top" alt="Pistachio Bread Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Pistachio Bread Cookie</h5>
+            <p class="price" data-price="17">Rs. 17</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Pistachio Bread Cookie" data-price="17">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/ba/f1/c1/baf1c1bdce4d218f6085a8cb9ba7af0d.jpg" class="card-img-top" alt="Buttery Raspberry Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Buttery Raspberry Cookie</h5>
+            <p class="price" data-price="18">Rs. 18</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Buttery Raspberry Cookie" data-price="18">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://i.pinimg.com/1200x/14/31/c8/1431c89e42c7dfd104103e37d3cdcec4.jpg" class="card-img-top" alt="Choco Dipped Shortbread Cookie">
+          <div class="card-body">
+            <h5 class="card-title">Choco Dipped Shortbread Cookie</h5>
+            <p class="price" data-price="15">Rs. 15</p>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-outline-success btn-custom add-to-cart" data-name="Choco Dipped Shortbread Cookie" data-price="15">Add to Cart</button>
+              <a href="buynow.html"><button class="btn btn-success btn-custom buy-now">Buy Now</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+    function updateCartCount() {
+      let count = 0;
+      for (let key in cart) count += cart[key].quantity;
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    function goToCart() {
+      window.location.href = "cookiesaddcart.html";
+    }
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = parseInt(button.getAttribute("data-price"));
+
+        if(cart[name]) {
+          cart[name].quantity += 1;
+        } else {
+          cart[name] = { name: name, price: price, quantity: 1 };
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+      });
+    });
+
+    document.querySelectorAll(".buy-now").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.closest('.card-body').querySelector('.card-title').textContent;
+        const price = parseInt(button.closest('.card-body').querySelector('.price').getAttribute('data-price'));
+
+        if(cart[name]) {
+          cart[name].quantity += 1;
+        } else {
+          cart[name] = { name: name, price: price, quantity: 1 };
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+
+        window.location.href = "buynow.html";
+      });
+    });
+
+    updateCartCount();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

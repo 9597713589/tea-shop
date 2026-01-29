@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oru Cup Story | Snacks Collection</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{background:#fffaf3}
+
+/* Navbar */
+.navbar{
+  background:#f3e9d2;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1)
+}
+.navbar-brand{
+  display:flex;
+  align-items:center;
+  font-weight:bold;
+  color:#5a3e2b!important
+}
+.navbar-brand img{
+  width:40px;
+  height:40px;
+  margin-right:10px
+}
+
+/* Cart Icon */
+.cart-icon{
+  position:relative;
+  font-size:26px;
+  cursor:pointer;
+}
+.cart-count{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:red;
+  color:#fff;
+  font-size:12px;
+  padding:2px 6px;
+  border-radius:50%;
+}
+
+/* Cards */
+.card{
+  border:none;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1)
+}
+.card-img-top{
+  height:400px;
+  object-fit:cover;
+}
+.price{
+  color:#2d36cf;
+  font-weight:600
+}
+.homebtn{
+    border-radius: 10px;
+    color: red;
+    margin-left: 800px;
+    border: none;
+    background-color: #f3e9d2;
+}
+
+/* Cart Box */
+#cartBox{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1)
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar px-4 d-flex justify-content-between">
+  <a class="navbar-brand" href="#">
+    <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png">
+    Oru Cup Story
+  </a>
+<a href="teashop.html"><button class="homebtn">Home</button></a>
+  <div class="cart-icon" onclick="scrollToCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+</nav>
+
+<div class="container py-5 text-center">
+<h2 class="fw-bold mb-4">🍪 Our Delicious Snacks Collection 🍪</h2>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+<!-- 1 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/0d/d8/87/0dd887162843337ecc3e221b3c590438.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Crispy Cabbage 65</h5>
+<p class="price">Rs.15</p>
+<button class="btn btn-outline-success" onclick="addToCart('Crispy Cabbage 65',15)">Add to Cart</button>
+</div></div></div>
+
+<!-- 2 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/e3/9e/89/e39e899e4ef4218654d2332626a581ca.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Pazham Pori</h5>
+<p class="price">Rs.14</p>
+<button class="btn btn-outline-success" onclick="addToCart('Pazham Pori',14)">Add to Cart</button>
+</div></div></div>
+
+<!-- 3 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/736x/27/76/67/27766717a1c56520b181df00ee30fdc0.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Medu Vadai</h5>
+<p class="price">Rs.10</p>
+<button class="btn btn-outline-success" onclick="addToCart('Medu Vadai',10)">Add to Cart</button>
+</div></div></div>
+
+<!-- 4 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/95/ba/42/95ba42f9c78d92b5dc67c37da12de877.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Thenga Manga Pattani Sundal</h5>
+<p class="price">Rs.30</p>
+<button class="btn btn-outline-success" onclick="addToCart('Thenga Manga Pattani Sundal',30)">Add to Cart</button>
+</div></div></div>
+
+<!-- 5 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/736x/c5/ae/45/c5ae4517a0287ff03d340277addbf6cb.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Muzhagaayi Bajji</h5>
+<p class="price">Rs.12</p>
+<button class="btn btn-outline-success" onclick="addToCart('Muzhagaayi Bajji',12)">Add to Cart</button>
+</div></div></div>
+
+<!-- 6 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/9c/4d/40/9c4d40aea90b66ceeb4dfa61d64eb541.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Shankarpali</h5>
+<p class="price">Rs.17</p>
+<button class="btn btn-outline-success" onclick="addToCart('Shankarpali',17)">Add to Cart</button>
+</div></div></div>
+
+<!-- 7 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/736x/86/30/07/863007f8cb4aa180ab4e1c6f026ab0b1.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Cashew Murukku</h5>
+<p class="price">Rs.13</p>
+<button class="btn btn-outline-success" onclick="addToCart('Cashew Murukku',13)">Add to Cart</button>
+</div></div></div>
+
+<!-- 8 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/a2/81/f1/a281f1d2f54b1ca803572d0fea489e0d.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Vazhaipoo Vadai</h5>
+<p class="price">Rs.17</p>
+<button class="btn btn-outline-success" onclick="addToCart('Vazhaipoo Vadai',17)">Add to Cart</button>
+</div></div></div>
+
+<!-- 9 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/9b/e1/56/9be1566280b601d9448eec493400d414.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Peanut Sundal</h5>
+<p class="price">Rs.25</p>
+<button class="btn btn-outline-success" onclick="addToCart('Peanut Sundal',25)">Add to Cart</button>
+</div></div></div>
+
+<!-- 10 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/dc/d7/09/dcd7091eaefbc5826d3e394527005fc7.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Athirasam</h5>
+<p class="price">Rs.10</p>
+<button class="btn btn-outline-success" onclick="addToCart('Athirasam',10)">Add to Cart</button>
+</div></div></div>
+
+<!-- 11 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/1200x/b6/a9/d4/b6a9d48510444b350c24bc9625da55d3.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Kerala Egg Puff</h5>
+<p class="price">Rs.15</p>
+<button class="btn btn-outline-success" onclick="addToCart('Kerala Egg Puff',15)">Add to Cart</button>
+</div></div></div>
+
+<!-- 12 -->
+<div class="col"><div class="card h-100">
+<img src="https://i.pinimg.com/736x/94/39/8b/94398b2c33e444259cd648e679cafc5a.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Biscuit Sandwich</h5>
+<p class="price">Rs.17</p>
+<button class="btn btn-outline-success" onclick="addToCart('Biscuit Sandwich',17)">Add to Cart</button>
+</div></div></div>
+
+</div>
+
+<hr class="my-5">
+
+<!-- CART -->
+<div id="cartBox">
+<h4>🛒 Cart</h4>
+<div id="cartItems"></div>
+<h5>Total: Rs.<span id="total">0</span></h5>
+<button class="btn btn-success mt-3" onclick="buyNow()">Buy Now</button>
+</div>
+
+</div>
+
+<script>
+let cart=[];
+
+function addToCart(name,price){
+  cart.push({name,price});
+  updateCart();
+}
+
+function updateCart(){
+  let html="", total=0;
+  cart.forEach((i,n)=>{
+    html+=`${n+1}. ${i.name} - Rs.${i.price}<br>`;
+    total+=i.price;
+  });
+  document.getElementById("cartItems").innerHTML=html;
+  document.getElementById("total").innerText=total;
+  document.getElementById("cartCount").innerText=cart.length;
+}
+
+function scrollToCart(){
+  document.getElementById("cartBox").scrollIntoView({behavior:"smooth"});
+}
+
+function buyNow(){
+  if(cart.length==0){
+    alert("Cart empty");
+    return;
+  }
+  alert("Order placed successfully!");
+  window.open("buynow.html");
+  cart=[];
+  updateCart();
+}
+</script>
+
+</body>
+</html>

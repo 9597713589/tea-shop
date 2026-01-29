@@ -1,0 +1,155 @@
+<!doctype html> 
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order - Oru Cup Story</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff4d4d,#b30000);
+  font-family:sans-serif;
+  padding-top:80px;
+}
+.card{
+  max-width:720px;width:100%;
+  padding:1.5rem;border-radius:20px;
+  margin:auto;
+  box-shadow:0 15px 40px rgba(0,0,0,0.4);
+  background:rgba(255,255,255,0.95)
+}
+.card-title{text-align:center;color:#b30000;font-weight:700;margin-bottom:1.5rem}
+#submitBtn{background:#b30000;border:none;color:#fff}
+#submitBtn:hover{background:#ff1a1a}
+#resetBtn{border-color:#bcea83;color:#b30000}
+#resetBtn:hover{background:#d2e79d;color:#fff}
+#successAlert{text-align:center;font-weight:600}
+
+.navbar-brand img{width:40px;height:40px;margin-right:10px;}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 NAVBAR ADDED HERE -->
+<nav class="navbar navbar-expand-lg px-4 fixed-top" style="background:#b30000;">
+  <a class="navbar-brand d-flex align-items-center text-white" href="#">
+    <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Tea Logo">
+    <span style="font-size:22px;font-weight:700;">Oru Cup Story</span>
+  </a>
+</nav>
+
+<!-- ORDER FORM CARD -->
+<div class="card mt-4">
+  <h4 class="card-title">🍪 Order Form</h4>
+
+  <div id="successAlert" class="alert alert-success d-none">You ordered successfully ✅</div>
+
+  <form id="orderForm" novalidate>
+
+    <input class="form-control mb-2" id="custName" placeholder="Name" required>
+
+    <input class="form-control mb-2" id="custContact" placeholder="Phone (10 digits)" maxlength="10" required>
+
+    <textarea class="form-control mb-2" id="custLocation" placeholder="Location/Address" rows="2" required></textarea>
+
+    <div class="mb-2">
+      <input type="radio" name="payType" id="payCOD" value="cod" checked> COD
+      <input type="radio" name="payType" id="payOnline" value="online" class="ms-2"> Online
+    </div>
+
+    <div id="onlineSection" class="mb-2 d-none">
+      <input type="radio" name="provider" value="gpay">GPay
+      <input type="radio" name="provider" value="phonepe" class="ms-2">PhonePe
+      <input type="radio" name="provider" value="paytm" class="ms-2">Paytm
+
+      <input type="text" class="form-control mt-2" id="upiNumber" placeholder="UPI ID">
+      <input type="text" class="form-control mt-1" id="upiName" placeholder="UPI Name">
+      <input type="password" class="form-control mt-1" id="secretCode" placeholder="Secret Code (4 digits)" maxlength="4">
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <button id="submitBtn" type="submit" class="btn">Submit</button>
+      <button id="resetBtn" type="button" class="btn btn-outline-secondary">Reset</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+(() => {
+
+const payCOD = document.getElementById('payCOD');
+const payOnline = document.getElementById('payOnline');
+const onlineSection = document.getElementById('onlineSection');
+const orderForm = document.getElementById('orderForm');
+const successAlert = document.getElementById('successAlert');
+
+function toggle() {
+  onlineSection.classList.toggle('d-none', !payOnline.checked);
+}
+
+payCOD.addEventListener('change', toggle);
+payOnline.addEventListener('change', toggle);
+
+orderForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custContact').value.trim();
+  const address = document.getElementById('custLocation').value.trim();
+  const secretCode = document.getElementById('secretCode').value.trim();
+
+  // basic validation
+  if(!name || !phone || !address){
+    alert("Fill all required fields!");
+    return;
+  }
+
+  if(phone.length !== 10 || isNaN(phone)){
+    alert("Phone number must be exactly 10 digits!");
+    return;
+  }
+
+  if(payOnline.checked){
+    const upiNumber = document.getElementById('upiNumber').value.trim();
+    const upiName = document.getElementById('upiName').value.trim();
+    const provider = document.querySelector("input[name='provider']:checked");
+
+    if(!provider){
+      alert("Select a UPI provider!");
+      return;
+    }
+
+    if(!upiNumber || !upiName || !secretCode){
+      alert("All online payment fields must be filled!");
+      return;
+    }
+
+    if(secretCode.length !== 4 || isNaN(secretCode)){
+      alert("Secret code must be 4 digits!");
+      return;
+    }
+  }
+
+  successAlert.classList.remove('d-none');
+  setTimeout(() => successAlert.classList.add('d-none'), 3000);
+
+  orderForm.reset();
+  toggle();
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  orderForm.reset();
+  toggle();
+  successAlert.classList.add('d-none');
+});
+
+})();
+</script>
+
+</body>
+</html>

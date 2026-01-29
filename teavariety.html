@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oru Cup Story</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{background:#f8f9fa;}
+
+.card{
+  border:none;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+.card-img-top{
+  height:250px;
+  object-fit:cover;
+}
+.price{
+  color:#198754;
+  font-weight:600;
+}
+.qty-btn{
+  width:30px;
+  height:30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 NAVBAR -->
+<nav class="navbar navbar-dark bg-success px-4">
+  <span class="navbar-brand fw-bold">☕ Oru Cup Story</span>
+
+  <div class="d-flex align-items-center">
+    <a href="teashop.html" class="text-white me-4 text-decoration-none">Home</a>
+
+    <!-- CART BUTTON -->
+    <button class="btn btn-light position-relative"
+      data-bs-toggle="modal" data-bs-target="#cartModal">
+      🛒 Cart
+      <span id="cartCount"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- PRODUCTS -->
+<div class="container py-4">
+<div class="row g-4" id="productList"></div>
+</div>
+
+<!-- 🛒 CART MODAL -->
+<div class="modal fade" id="cartModal">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+<div class="modal-header">
+  <h5 class="modal-title">Your Cart</h5>
+  <button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+  <div id="cartItems"></div>
+  <hr>
+  <h5>Total: ₹<span id="total">0</span></h5>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" onclick="buyNow()">Buy Now</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ✅ JS -->
+<script>
+const products = [
+ ["Black Tea",8,"https://i.pinimg.com/736x/54/cd/45/54cd45ca1879ef284783b71b06928088.jpg"],
+ ["Green Tea",10,"https://i.pinimg.com/1200x/7b/f7/e0/7bf7e0d20b782f521fea0e6063ce2bd5.jpg"],
+ ["Lemon Tea",15,"https://i.pinimg.com/736x/7b/e7/e0/7be7e00f8f0b66eb54ad0e8b4fac1b6e.jpg"],
+ ["Normal Tea",10,"https://i.pinimg.com/736x/ff/d0/2f/ffd02fe6e9a1fada60a275f5e43cdf4b.jpg"],
+ ["Ginger Tea",14,"https://i.pinimg.com/736x/4f/f6/da/4ff6daf01ac3f84feb8eee23ec017a7e.jpg"],
+ ["Mint Tea",18,"https://i.pinimg.com/736x/3a/9c/91/3a9c912b93f6a9d7b70c674cee2776ac.jpg"],
+ ["Tulasi Tea",21,"https://i.pinimg.com/1200x/8e/d3/77/8ed37787487f5ec7ba0c92a8ed93f661.jpg"],
+ ["Herbal Detox Tea",28,"https://i.pinimg.com/1200x/9f/ea/33/9fea33e4aebd714640f6064b154cbe3e.jpg"],
+ ["Hibiscus Tea",17,"https://i.pinimg.com/1200x/0c/c0/39/0cc03988822607f68346a601a7a9b9e9.jpg"],
+ ["Yellow Tea",13,"https://i.pinimg.com/736x/d8/96/c4/d896c4734ce6b2b2bfa02ce49bb3b51b.jpg"],
+ ["Masala Tea",18,"https://i.pinimg.com/1200x/7b/fd/b3/7bfdb3f39667109741da29be2211df91.jpg"],
+ ["Special Tea",27,"https://i.pinimg.com/736x/22/33/bf/2233bf899709fc983fa0f2dc1cd3bc35.jpg"]
+];
+
+let cart = {};
+
+// Render products
+let productHTML="";
+products.forEach(p=>{
+  productHTML+=`
+  <div class="col-md-3">
+    <div class="card text-center">
+      <img src="${p[2]}" class="card-img-top">
+      <div class="card-body">
+        <h6>${p[0]}</h6>
+        <div class="price">₹${p[1]}</div>
+        <button class="btn btn-outline-success btn-sm mt-2"
+          onclick="addToCart('${p[0]}',${p[1]})">Add to Cart</button>
+      </div>
+    </div>
+  </div>`;
+});
+document.getElementById("productList").innerHTML=productHTML;
+
+// Cart functions
+function addToCart(name,price){
+  cart[name]?cart[name].qty++:(cart[name]={price,qty:1});
+  renderCart();
+}
+
+function changeQty(name,val){
+  cart[name].qty+=val;
+  if(cart[name].qty<=0) delete cart[name];
+  renderCart();
+}
+
+function renderCart(){
+  let html="",total=0,count=0;
+  for(let item in cart){
+    let sub=cart[item].price*cart[item].qty;
+    total+=sub;
+    count+=cart[item].qty;
+    html+=`
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div>
+        <strong>${item}</strong><br>
+        ₹${cart[item].price} x ${cart[item].qty}
+      </div>
+      <div>
+        <button class="btn btn-sm btn-danger qty-btn"
+          onclick="changeQty('${item}',-1)">-</button>
+        <button class="btn btn-sm btn-success qty-btn"
+          onclick="changeQty('${item}',1)">+</button>
+      </div>
+    </div>`;
+  }
+  document.getElementById("cartItems").innerHTML=html || "Cart is empty";
+  document.getElementById("total").innerText=total;
+  document.getElementById("cartCount").innerText=count;
+}
+
+// Buy now
+function buyNow(){
+  if(Object.keys(cart).length===0){
+    alert("Cart empty da 😄");
+    return;
+  }
+          window.location.href = "buynow.html";
+
+  
+  cart={};
+  renderCart();
+  bootstrap.Modal.getInstance(document.getElementById("cartModal")).hide();
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
